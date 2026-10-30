@@ -1,0 +1,192 @@
+/* ==========================================================
+   ESTILOS – Scrum y Kanban, Clínica Salvador
+   ========================================================== */
+
+/* ---------- 1. COLORES (tema claro por defecto) ---------- */
+:root {
+  --fondo: #f6f4ef;
+  --tarjeta: #ffffff;
+  --texto: #1a1a1a;
+  --texto-suave: #5d6470;
+  --acento: #2a9d8f;
+  --titulo: #14213d;
+  --borde: #ddd8cc;
+  color-scheme: light;
+}
+
+/* Tema oscuro automático si el sistema lo usa
+   (a menos que el usuario haya elegido "light" con el botón) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fondo: #10172a;
+    --tarjeta: #1b2540;
+    --texto: #eef0f5;
+    --texto-suave: #a9b2c6;
+    --acento: #4fc3b4;
+    --titulo: #e9c46a;
+    --borde: #2c3961;
+    color-scheme: dark;
+  }
+}
+
+/* Tema oscuro elegido manualmente con el botón "Tema" */
+:root[data-theme="dark"] {
+  --fondo: #10172a;
+  --tarjeta: #1b2540;
+  --texto: #eef0f5;
+  --texto-suave: #a9b2c6;
+  --acento: #4fc3b4;
+  --titulo: #e9c46a;
+  --borde: #2c3961;
+  color-scheme: dark;
+}
+
+/* ---------- 2. BASE ---------- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+
+h1 { margin: 0; font-size: 1.5rem; color: var(--titulo); }
+h2 { margin: 8px 0; color: var(--titulo); }
+h3 { margin: 0 0 6px; color: var(--acento); }
+
+.texto-suave { color: var(--texto-suave); }
+
+/* ---------- 3. ENCABEZADO Y MENÚ ---------- */
+header {
+  max-width: 960px;
+  margin: auto;
+  padding: 24px 20px 8px;
+}
+header p { margin: 4px 0; color: var(--texto-suave); }
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 960px;
+  margin: auto;
+  padding: 8px 20px;
+}
+nav button {
+  border: 1px solid var(--borde);
+  background: var(--tarjeta);
+  color: var(--texto);
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+nav button.activo {            /* pestaña seleccionada */
+  background: var(--acento);
+  color: #fff;
+  border-color: var(--acento);
+}
+
+/* ---------- 4. SECCIONES (solo se ve la activa) ---------- */
+main { max-width: 960px; margin: auto; padding: 12px 20px 48px; }
+section { display: none; }
+section.activa { display: block; }
+
+/* ---------- 5. TARJETAS Y REJILLA ---------- */
+.card {
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 10px 0;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+/* ---------- 6. TABLA DEL BACKLOG ---------- */
+.tabla-scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 520px; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--borde); }
+
+/* ---------- 7. TABLERO KANBAN ---------- */
+.columna {
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 10px;
+  min-height: 120px;
+}
+.columna h3 { font-size: 0.95rem; }
+
+.tarea {
+  background: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 8px;
+  margin: 6px 0;
+  font-size: 0.9rem;
+}
+.tarea div { display: flex; gap: 6px; margin-top: 6px; }
+.tarea button {
+  border: 1px solid var(--borde);
+  background: var(--tarjeta);
+  color: var(--texto);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+/* ---------- 8. FORMULARIO (MOCKUP) ---------- */
+select, input[type="text"], input[type="date"], input:not([type]) {
+  width: 100%;
+  padding: 10px;
+  margin: 4px 0 10px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--fondo);
+  color: var(--texto);
+  font-size: 1rem;
+}
+input[inputmode="numeric"] { width: 100%; }
+
+.horarios { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.horario {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--acento);
+  background: var(--fondo);
+  color: var(--texto);
+  cursor: pointer;
+}
+.horario.elegido { background: var(--acento); color: #fff; }
+.horario:disabled {            /* horario ya ocupado */
+  opacity: 0.4;
+  text-decoration: line-through;
+  cursor: not-allowed;
+  border-color: var(--borde);
+}
+
+/* ---------- 9. BOTONES Y MENSAJES ---------- */
+.btn {
+  background: var(--acento);
+  color: #fff;
+  border: 0;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn-tema { float: right; padding: 4px 10px; font-size: 0.8rem; }
+
+.mensaje { padding: 12px; border-radius: 8px; margin-top: 10px; }
+.mensaje.ok { background: rgba(42, 157, 143, 0.18); }
+.mensaje.error { background: rgba(214, 69, 65, 0.18); }
+
+/* ---------- 10. MANTENIMIENTO ---------- */
+label.check { display: block; padding: 6px 0; }
+label.check input { width: auto; }

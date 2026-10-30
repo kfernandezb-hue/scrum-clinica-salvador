@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scrum y Kanban – Clínica Salvador</title>
+  <link rel="icon" type="image/png" href="icono.png">
+  <!-- Estilos de la página -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ENCABEZADO -->
+  <header>
+    <button class="btn btn-tema" id="btn-tema">Tema</button>
+    <h1>Scrum y Kanban – Clínica Salvador</h1>
+    <p>Actividad Unidad 4 · Kevin Fernández, Maira Llamas y Andrés Acevedo</p>
+  </header>
+
+  <!-- MENÚ DE PESTAÑAS (los botones se crean desde app.js) -->
+  <nav id="menu"></nav>
+
+  <main>
+
+    <!-- 1. ROLES -->
+    <section id="roles">
+      <h2>Roles</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Product Owner</h3>
+          <b>Kevin Fernández</b>
+          <p>Representa a la clínica, prioriza el backlog y acepta el incremento.</p>
+        </div>
+        <div class="card">
+          <h3>Scrum Master</h3>
+          <b>Maira Llamas</b>
+          <p>Facilita los eventos de Scrum y elimina impedimentos.</p>
+        </div>
+        <div class="card">
+          <h3>Equipo de desarrollo</h3>
+          <b>Andrés Acevedo</b>
+          <p>Diseña, programa y prueba las historias del sprint.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PRODUCT BACKLOG (la tabla se llena desde app.js) -->
+    <section id="backlog">
+      <h2>Product Backlog</h2>
+      <div class="card tabla-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Como recepcionista, quiero…</th>
+              <th>Prioridad</th>
+              <th>Puntos</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-backlog"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3. SPRINT: planning, goal y backlog -->
+    <section id="sprint">
+      <h2>Sprint 1 (2 semanas)</h2>
+      <div class="card">
+        <h3>Sprint Goal (objetivo)</h3>
+        Permitir que el recepcionista registre una cita para un paciente con un
+        médico disponible en un horario específico, sin cruces de horario.
+      </div>
+      <div class="card">
+        <h3>Sprint Planning</h3>
+        El equipo toma HU-01 a HU-06 (25 puntos) del backlog.
+      </div>
+      <div class="card">
+        <h3>Sprint Backlog (pila de tareas)</h3>
+        <ul>
+          <li>HU-01: formulario y tabla Paciente</li>
+          <li>HU-02: búsqueda por documento</li>
+          <li>HU-03: lista de médicos por especialidad</li>
+          <li>HU-04: horarios libres y regla anti-cruce</li>
+          <li>HU-05: formulario de cita, guardado, validaciones y pruebas</li>
+          <li>HU-06: mensaje de confirmación</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. TABLERO KANBAN (las columnas se dibujan desde app.js) -->
+    <section id="kanban">
+      <h2>Tablero Kanban</h2>
+      <p class="texto-suave">Mueve las tarjetas con las flechas. Límite WIP en “En progreso”: 3.</p>
+      <div class="grid" id="tablero"></div>
+      <div id="aviso-wip"></div>
+    </section>
+
+    <!-- 5. DAILY SCRUM (simulación) -->
+    <section id="daily">
+      <h2>Daily Scrum</h2>
+      <div class="card"><b>Maira (SM):</b> Kevin, Andrés, ¿qué hicieron ayer, qué harán hoy y qué impedimentos tienen?</div>
+      <div class="card"><b>Andrés:</b> Ayer terminé la búsqueda por documento. Hoy sigo con el formulario de cita. Impedimento: no tengo claro el formato de los horarios.</div>
+      <div class="card"><b>Kevin (PO):</b> Ayer definí los criterios de aceptación de HU-05. Hoy confirmo con la clínica: horarios en bloques de 30 minutos.</div>
+      <div class="card"><b>Maira (SM):</b> Quedó resuelto el impedimento; Andrés puede continuar.</div>
+    </section>
+
+    <!-- 6. MOCKUP / INCREMENTO: pantalla "Registrar cita" -->
+    <section id="mockup">
+      <h2>Incremento: Registrar cita</h2>
+      <div class="card">
+        <label for="documento">Documento del paciente</label>
+        <input id="documento" value="1045678901" inputmode="numeric">
+
+        <label for="especialidad">Especialidad</label>
+        <select id="especialidad"></select>
+
+        <label for="medico">Médico disponible</label>
+        <select id="medico"></select>
+
+        <label for="fecha">Fecha</label>
+        <input id="fecha" type="date">
+
+        <label>Horario</label>
+        <div class="horarios" id="horarios"></div>
+
+        <button class="btn" id="btn-registrar">Registrar cita</button>
+        <div id="resultado"></div>
+      </div>
+
+      <div class="card">
+        <h3>Citas registradas</h3>
+        <ul id="lista-citas">
+          <li class="texto-suave">Aún no hay citas.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7. SPRINT REVIEW Y RETROSPECTIVE -->
+    <section id="review">
+      <h2>Review y Retrospectiva</h2>
+      <div class="card">
+        <h3>Sprint Review</h3>
+        Se demuestra el flujo: buscar paciente, elegir médico, elegir horario libre
+        y registrar. El PO acepta HU-01 a HU-05; HU-06 queda parcial.
+        Feedback: mostrar el consultorio en la confirmación.
+      </div>
+      <div class="grid">
+        <div class="card"><h3>Qué salió bien</h3>Dailies breves y tablero Kanban claro.</div>
+        <div class="card"><h3>Qué mejorar</h3>La estimación de horarios y probar más temprano.</div>
+        <div class="card"><h3>Acciones</h3>Refinar el backlog antes del próximo sprint y probar cada tarea al terminarla.</div>
+      </div>
+    </section>
+
+    <!-- 8. MANTENIMIENTO DE SOFTWARE -->
+    <section id="mant">
+      <h2>Mantenimiento de software</h2>
+      <div class="card">
+        <p>
+          Cambios pedidos por el cliente:
+          <b>“Mostrar el consultorio en la confirmación”</b> y
+          <b>“Bloquear citas fuera del horario de atención”</b>.
+        </p>
+        <p class="texto-suave">Marca los tipos de mantenimiento que apliquen:</p>
+        <label class="check"><input type="checkbox" class="tipo-mant" value="c"> Correctivo</label>
+        <label class="check"><input type="checkbox" class="tipo-mant" value="a"> Adaptativo</label>
+        <label class="check"><input type="checkbox" class="tipo-mant" value="p"> Perfectivo</label>
+        <label class="check"><input type="checkbox" class="tipo-mant" value="v"> Preventivo</label>
+        <div id="explicacion-mant"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Lógica de la página -->
+  <script src="app.js"></script>
+</body>
+</html>
